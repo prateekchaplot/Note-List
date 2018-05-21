@@ -57,6 +57,17 @@ def update():
             print("* Invalid index selected... *")
 
 
+def save_file():
+    try:
+        f = open("note_list.txt", "a")
+        for item in user_list:
+            f.write(" * {}\n".format(item))
+        f.close()
+    except Exception:
+        print("Problem encountered while saving!")
+    else:
+        print("\n** Items saved! **")
+
 clear_screen()
 print("\n ** Welcome to Note List **", end="")
 input()
@@ -86,3 +97,5 @@ while True:
     user_list.append(item)
 
 show()
+save_file()
+input("Press Enter to exit...")
