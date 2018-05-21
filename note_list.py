@@ -6,9 +6,10 @@ def clear_screen():
 
 
 def help():
-    print("* Enter Q exit *")
+    print("* Enter Q to exit *")
     print("* Enter S to show list *")
     print("* Enter R to remove item from list *")
+    print("* Enter U to update item in list *")
 
 
 def show():
@@ -38,6 +39,24 @@ def remove():
             print("* Invalid index selected... *")
     
 
+def update():
+    show()
+    print("\n* Enter index of the item to be updated *")
+    print("* Press Enter if you don't want to update any item *\n")
+
+    try:
+        index = int(input("> ")) - 1
+    except ValueError:
+        print("List Unchanged!")
+    else:
+        if index in range(len(user_list)):
+            clear_screen()
+            user_list[index] = input("Enter value for {}\n> ".format(user_list[index]))
+            print("Updated to:", user_list[index])
+        else:
+            print("* Invalid index selected... *")
+
+
 clear_screen()
 print("\n ** Welcome to Note List **", end="")
 input()
@@ -57,6 +76,10 @@ while True:
         continue
     elif item.lower() == 'r':
         remove()
+        input("Press return to continue...")
+        continue
+    elif item.lower() == 'u':
+        update()
         input("Press return to continue...")
         continue
 
