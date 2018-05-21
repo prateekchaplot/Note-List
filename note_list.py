@@ -19,7 +19,7 @@ def show():
     print("-"*10)
 
     for index in range(len(user_list)):
-        print("{}. {}".format(index+1, user_list[index]))
+        print("{}. {}".format(index + 1, user_list[index]))
 
 
 def remove():
@@ -59,19 +59,42 @@ def update():
 
 def save_file():
     try:
-        f = open("note_list.txt", "a")
+        if not file_exits:
+            f = open("note_list.txt", "a")
+        else:
+            f = open("note_list.txt", "w")
+
         for item in user_list:
-            f.write(" * {}\n".format(item))
+            f.write("{}\n".format(item))
         f.close()
     except Exception:
         print("Problem encountered while saving!")
     else:
         print("\n** Items saved! **")
 
+
+def read_file():
+    try:
+        f = open("note_list.txt", "r")
+        notes = f.read()
+        user_list = notes.split("\n")
+        user_list.pop()
+        f.close()
+    except Exception:
+        file_exits = False
+        print(" * No existing file found! *")
+    else:
+        print(" ** Existing file loaded! **")
+
+
 clear_screen()
-print("\n ** Welcome to Note List **", end="")
-input()
+
+file_exits = True
 user_list = []
+
+print("\n ** Welcome to Note List **")
+read_file()
+input()
 
 while True:
     clear_screen()
