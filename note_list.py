@@ -88,7 +88,7 @@ def read_file(file_exists, user_list):
         file_exists = False
         print(" * No existing file found! *")
     else:
-        user_list = f.read().split("\n")``
+        user_list = f.read().split("\n")
         f.close()
         print(" ** Existing file loaded! **")
     
