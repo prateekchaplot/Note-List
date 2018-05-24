@@ -59,41 +59,49 @@ def update():
 
 def save_file():
     try:
-        if not file_exits:
+        if not file_exists:
             f = open("note_list.txt", "a")
         else:
             f = open("note_list.txt", "w")
-
-        for item in user_list:
-            f.write("{}\n".format(item))
-        f.close()
     except Exception:
         print("Problem encountered while saving!")
     else:
+        size = len(user_list)
+        for index in range(size):
+            if index != size - 1:
+                f.write("{}\n".format(user_list[index]))
+            else:
+                f.write("{}".format(user_list[index]))
+
+        # for item in user_list:
+        #     f.write("{}\n".format(item))
+
+        f.close()
+
         print("\n** Items saved! **")
 
 
-def read_file():
+def read_file(file_exists, user_list):
     try:
         f = open("note_list.txt", "r")
-        notes = f.read()
-        user_list = notes.split("\n")
-        user_list.pop()
-        f.close()
     except Exception:
-        file_exits = False
+        file_exists = False
         print(" * No existing file found! *")
     else:
+        user_list = f.read().split("\n")
+        f.close()
         print(" ** Existing file loaded! **")
+    
+    return (file_exists, user_list)
 
 
 clear_screen()
 
-file_exits = True
+file_exists = True
 user_list = []
 
 print("\n ** Welcome to Note List **")
-read_file()
+file_exists, user_list= read_file(file_exists, user_list)
 input()
 
 while True:
